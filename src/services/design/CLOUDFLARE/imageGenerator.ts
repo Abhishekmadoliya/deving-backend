@@ -30,6 +30,26 @@ export async function callCloudflareImageGenerator(prompt: string) {
         }
     );
 
+    // FLUX.1 or SD3 via Replicate API
+    // const response = await fetch("https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions", {
+    //     method: "POST",
+    //     headers: {
+    //         "Authorization": `Bearer ${CF_AI_TOKEN}`,
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         input: {
+    //             prompt: systemPrompt,
+    //             width: 1024,
+    //             height: 768,
+    //             num_outputs: 1
+    //         }
+    //     })
+    // });
+
+    // const prediction = await response.json();
+    // Poll prediction.urls.get until status === "succeeded"
+
     if (!response.ok) {
         const err = await response.json();
         throw new Error(`Cloudflare AI error: ${JSON.stringify(err.errors)}`);

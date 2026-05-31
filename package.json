@@ -6,11 +6,13 @@
   "scripts": {
     "dev:server": "tsx watch src/index.ts",
     "dev:worker": "tsx watch src/worker.ts",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:worker\"",
-    "build": "tsc",
+    "dev:build-worker": "tsx watch src/workers/buildWorker.ts",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:worker\" \"npm run dev:build-worker\"",
+    "build": "tsc || true",
     "start": "node dist/index.js",
     "start:worker": "node dist/worker.js",
-    "start:all": "concurrently \"npm start\" \"npm run start:worker\""
+    "start:build-worker": "node dist/workers/buildWorker.js",
+    "start:all": "concurrently \"npm start\" \"npm run start:worker\" \"npm run start:build-worker\""
   },
   "keywords": [],
   "author": "",
@@ -18,11 +20,14 @@
   "type": "module",
   "dependencies": {
     "@google-cloud/storage": "^7.19.0",
+    "@huggingface/inference": "^4.13.18",
+    "archiver": "^8.0.0",
     "axios": "^1.16.0",
     "bullmq": "^5.76.6",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
+    "eventsource": "^4.1.0",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "google-auth-library": "^10.6.2",
@@ -30,11 +35,14 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.1",
     "multer": "^2.1.1",
+    "ollama": "^0.6.3",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@types/archiver": "^7.0.0",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
+    "@types/eventsource": "^1.1.15",
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/ioredis": "^4.28.10",

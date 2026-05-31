@@ -5,7 +5,8 @@ export default async function uploadToGCS(rawImageBuffer: Buffer, sessionId: str
 
     console.log("bucket", bucket);
 
-    const fileName = `${sessionId}/image.png`
+    const timestamp = Date.now();
+    const fileName = `${sessionId}/${timestamp}-image.png`;
 
     try {
         await bucket.file(fileName).save(rawImageBuffer, {
