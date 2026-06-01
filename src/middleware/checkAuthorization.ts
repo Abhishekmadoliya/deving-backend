@@ -28,7 +28,7 @@ export const checkAuthorization = async (req: Request, res: Response, next: Next
         }
 
         // get user from decoded.email 
-        const user = await User.findOne({ email: decoded.email });
+        const user = await User.findOne({ email: (decoded as any).email });
 
         if (!user) {
             return res.status(401).json({

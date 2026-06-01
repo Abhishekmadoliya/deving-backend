@@ -203,7 +203,7 @@ export async function handleCreateDesign(req: Request, res: Response) {
         designSession.designPrompt = designPrompt;
         designSession.status = "queued";
         designSession.imageUrl = null;
-        designSession.enhancedPrompt = undefined;
+        designSession.enhancedPrompt = null as any;
         designSession.errorMessage = null;
         if (model) designSession.model = model;
 
