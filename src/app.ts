@@ -52,6 +52,14 @@ declare module "express-session" {
   }
 }
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: any;
+    }
+  }
+}
+
 app.get('/', (_, res) => {
   res.json({ success: true, message: 'Welcome to the Devign API!' });
 });
