@@ -16,7 +16,7 @@ pnpm-debug.log*
 
 # build files
 dist/
-build/
+/build/
 
 # TypeScript
 *.tsbuildinfo
