@@ -10,13 +10,12 @@ services:
       - PORT=8080
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - MONGO_URI=mongodb://mongo:27017/devign
-      # Add other necessary env vars from your .env file here
     depends_on:
       - redis
-      - mongo
     env_file:
-      - .env
+      - .env.production
+    volumes:
+      - ./marine-guard-438713-q1-4a078155e02a.json:/usr/src/app/service-account.json:ro
 
   worker:
     build: .
@@ -27,12 +26,12 @@ services:
       - NODE_ENV=production
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - MONGO_URI=mongodb://mongo:27017/devign
     depends_on:
       - redis
-      - mongo
     env_file:
-      - .env
+      - .env.production
+    volumes:
+      - ./marine-guard-438713-q1-4a078155e02a.json:/usr/src/app/service-account.json:ro
 
   build-worker:
     build: .
@@ -43,31 +42,21 @@ services:
       - NODE_ENV=production
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - MONGO_URI=mongodb://mongo:27017/devign
     depends_on:
       - redis
-      - mongo
     env_file:
-      - .env
+      - .env.production
+    volumes:
+      - ./marine-guard-438713-q1-4a078155e02a.json:/usr/src/app/service-account.json:ro
 
   redis:
     image: redis:alpine
     container_name: devign-redis
     restart: always
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     volumes:
       - redis_data:/data
 
-  mongo:
-    image: mongo:latest
-    container_name: devign-mongo
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data
-
 volumes:
   redis_data:
-  mongo_data:
