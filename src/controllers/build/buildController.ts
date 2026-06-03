@@ -9,7 +9,7 @@ import { buildMainQueue } from "../../queues/buildQueue.js";
 import { createRedisSubscriber } from "../../config/redis.js";
 import { isImageFile, isDocFile } from "../../lib/buildUpload.js";
 import { bucket } from "../../lib/gcs.js";
-import archiver from "archiver";
+import * as archiver from "archiver";
 
 // ── Helpers ───────────────────────────────────────────────────
 
